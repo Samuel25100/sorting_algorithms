@@ -13,7 +13,7 @@
  */
 typedef struct listint_s
 {
-    const int n;
+    int n;
     struct listint_s *prev;
     struct listint_s *next;
 } listint_t;
@@ -22,9 +22,15 @@ typedef struct listint_s
 
 void print_list(const listint_t *list);
 void print_array(const int *array, size_t size);
+/*Sorting Algorithm 0*/
 void bubble_sort(int *array, size_t size);
 void swap(int *array, int index0, int index1);
+/*Sorting Algorithm 1*/
 void insertion_sort_list(listint_t **list);
+int insert_array(listint_t **list, int *array);
+void print_arr_tolist(int *array, listint_t **list);
+/*Sorting Algorithm 2*/
 void selection_sort(int *array, size_t size);
+/*Sorting Algorithm 3*/
 void quick_sort(int *array, size_t size);
 #endif
