@@ -24,7 +24,6 @@ void print_list(const listint_t *list);
 void print_array(const int *array, size_t size);
 /*Sorting Algorithm 0*/
 void bubble_sort(int *array, size_t size);
-void swap(int *array, int index0, int index1);
 /*Sorting Algorithm 1*/
 void insertion_sort_list(listint_t **list);
 int insert_array(listint_t **list, int *array);

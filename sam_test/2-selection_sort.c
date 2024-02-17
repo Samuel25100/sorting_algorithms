@@ -1,29 +1,28 @@
 #include "sort.h"
 void swap(int *array, int index0, int index1);
 /**
- * bubble_sort - bubble sort the input array
+ * selection_sort - sort array using selection sort algorithm
  * @array: the array to be sorted
  * @size: size of the array
  * Return: void
  */
-void bubble_sort(int *array, size_t size)
+void selection_sort(int *array, size_t size)
 {
-	long unsigned int i, j, flag;
+	long unsigned int i, min_ind, j;
 
 	for (i = 0; i < (size - 1); i++)
 	{
-	flag = 0;
-		for (j = 0; j < (size - i - 1); j++)
+	min_ind = i;
+		for (j = i + 1; j < size; j++)
 		{
-			if (array[j] > array[j + 1])
-			{
-			swap(array, j, j + 1);
-			flag = 1;
-			print_array(array, size);
-			}
+		if (array[j] < array[min_ind])
+			min_ind = j;
 		}
-	if (flag == 0)
-		break;
+	if (min_ind != i)
+	{
+	swap(array, min_ind, i);
+	print_array(array, size);
+	}
 	}
 }
 /**
@@ -32,7 +31,7 @@ void bubble_sort(int *array, size_t size)
  * @index0: index to value of an array
  * @index1: index to value of an other array
  * Return: void
- */ 
+ */
 void swap(int *array, int index0, int index1)
 {
 	int temp;
