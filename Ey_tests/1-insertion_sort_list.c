@@ -1,9 +1,4 @@
 #include "sort.h"
-/**
- * insertion_sort_list - sorts doubly linked list
- * @list: pointer holding the address of the head pointer
- *
- */
 void insertion_sort_list(listint_t **list)
 {
 	listint_t *current;
@@ -60,6 +55,7 @@ void insertion_sort_list(listint_t **list)
 			/*after swapping we must move our back one more node back for backtracking because we have to compare the value with other previous
 			 * values for that we make back is current previous and current will be back next just to make it tigh
 			 */
+			print_list((const listint_t *)*list);
 			if (current->prev != NULL)
 			{
 				back = current->prev;
@@ -74,7 +70,6 @@ void insertion_sort_list(listint_t **list)
 		 * we assging current to move to next to move it forward
 		 */
 		/**checking for every iteration**/
-		print_list((const listint_t *)*list);
 		current = current->next;
 	}
 }
