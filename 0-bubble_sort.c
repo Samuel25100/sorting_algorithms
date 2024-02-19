@@ -1,43 +1,31 @@
 #include "sort.h"
-void swap(int *array, int index0, int index1);
 /**
- * bubble_sort - bubble sort the input array
- * @array: the array to be sorted
- * @size: size of the array
- * Return: void
+ * bubble_sort - function that takes array to perform bubble
+ * @array: address of the array passed
+ * @size: size of the array passed
+ *
  */
 void bubble_sort(int *array, size_t size)
 {
-	unsigned long int i, j, flag;
+	size_t i, j;
+	int temp, tracker = 0;
 
-	for (i = 0; i < (size - 1); i++)
+	if (array == NULL || size < 2)
+		return;
+	for (j = 0; j < size - 1; j++)
 	{
-	flag = 0;
-		for (j = 0; j < (size - i - 1); j++)
+		for (i = 0; i < size - 1; i++)
 		{
-			if (array[j] > array[j + 1])
+			if (array[i] > array[i + 1])
 			{
-			swap(array, j, j + 1);
-			flag = 1;
-			print_array(array, size);
+				temp = array[i];
+				array[i] = array[i + 1];
+				array[i + 1] = temp;
+				tracker++;
+				print_array(array, size);
 			}
 		}
-	if (flag == 0)
-		break;
+		if (tracker == 0)
+			break;
 	}
-}
-/**
- * swap - swap two value
- * @array: pointer to the array
- * @index0: index to value of an array
- * @index1: index to value of an other array
- * Return: void
- */
-void swap(int *array, int index0, int index1)
-{
-	int temp;
-
-	temp = array[index0];
-	array[index0] = array[index1];
-	array[index1] = temp;
 }
