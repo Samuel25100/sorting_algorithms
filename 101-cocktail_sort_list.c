@@ -92,8 +92,8 @@ void backward_pass(listint_t **list, listint_t **current, listint_t **next,
 		{
 			listint_t *temp = (*current)->prev;
 			*next = *current;
-			*current = temp;
-
+			if ((*current)->prev != NULL)
+				*current = temp;
 		}
 	}
 	if (*start != NULL && (*start)->prev == NULL)
@@ -126,7 +126,7 @@ void cocktail_sort_list(listint_t **list)
 			end = last_swapped;
 		swapped = 0;
 		backward_pass(list, &current, &next, &start, &last_swapped, &swapped);
-		if (last_swapped == NULL)
+		if (last_swapped != NULL)
 			start = last_swapped;
 	}
 }
