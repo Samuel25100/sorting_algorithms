@@ -25,8 +25,6 @@ void forward_pass(listint_t **list, listint_t **current, listint_t **next,
 			(*current)->next = (*next)->next;
 			if ((*next)->next != NULL)
 				(*next)->next->prev = *current;
-			else
-				*list = *next;
 			(*current)->prev = *next;
 			(*next)->next = *current;
 			if ((*current)->next != *end)
@@ -37,6 +35,7 @@ void forward_pass(listint_t **list, listint_t **current, listint_t **next,
 				*next = *current;
 				*current = (*next)->prev;
 				(*swapped)++;
+				print_list((const listint_t *)*list);
 				break;
 			}
 			(*swapped)++;
@@ -123,9 +122,11 @@ void cocktail_sort_list(listint_t **list)
 		forward_pass(list, &current, &next, &end, &last_swapped, &swapped);
 		if (swapped == 0)
 			break;
-		end = last_swapped;
+		if (last_swapped != NULL)
+			end = last_swapped;
 		swapped = 0;
 		backward_pass(list, &current, &next, &start, &last_swapped, &swapped);
-		start = last_swapped;
+		if (last_swapped == NULL)
+			start = last_swapped;
 	}
 }
