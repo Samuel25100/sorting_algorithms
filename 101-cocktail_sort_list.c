@@ -109,8 +109,8 @@ void cocktail_sort_list(listint_t **list)
 	listint_t *current, *next, *start, *end, *last_swapped;
 	int swapped = 1;
 
-	if (*list == NULL || list == NULL)
-		return;
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
+				return;
 
 	start = *list;
 	end = NULL;
