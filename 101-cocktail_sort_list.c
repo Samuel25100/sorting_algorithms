@@ -12,7 +12,6 @@
 void forward_pass(listint_t **list, listint_t **current, listint_t **next,
 		listint_t **end, listint_t **last_swapped, int *swapped)
 {
-	*swapped = 0;
 	while (*next != *end && *next != NULL)
 	{
 		if (*next != NULL && (*current)->n > (*next)->n)
@@ -32,7 +31,6 @@ void forward_pass(listint_t **list, listint_t **current, listint_t **next,
 			else if ((*current)->next == *end)
 			{
 				*last_swapped = *current;
-				*next = *current;
 				*current = (*next)->prev;
 				(*swapped)++;
 				print_list((const listint_t *)*list);
@@ -44,11 +42,8 @@ void forward_pass(listint_t **list, listint_t **current, listint_t **next,
 		else
 		{
 			*current = *next;
-			if ((*next)->next != NULL)
-				*next = (*next)->next;
-
+			*next = (*next)->next;
 		}
-
 	}
 }
 /**
@@ -64,7 +59,6 @@ void forward_pass(listint_t **list, listint_t **current, listint_t **next,
 void backward_pass(listint_t **list, listint_t **current, listint_t **next,
 		listint_t **start, listint_t **last_swapped, int *swapped)
 {
-
 	while ((*current) != *start && *current != NULL)
 	{
 		if ((*current)->n > (*next)->n)
@@ -82,7 +76,12 @@ void backward_pass(listint_t **list, listint_t **current, listint_t **next,
 			else
 			{
 				*last_swapped = *next;
+				if ((*next)->prev == NULL)
+					*list = *next;
 				*next = (*current)->next;
+				(*swapped)++;
+				print_list((const listint_t *)*list);
+				break;	
 			}
 			(*swapped)++;
 			print_list((const listint_t *)*list);
@@ -90,14 +89,14 @@ void backward_pass(listint_t **list, listint_t **current, listint_t **next,
 		}
 		else
 		{
-			listint_t *temp = (*current)->prev;
 			*next = *current;
-			if ((*current)->prev != NULL)
-				*current = temp;
+			*current = (*next)->prev;
 		}
 	}
+	/**
 	if (*start != NULL && (*start)->prev == NULL)
 		*list = *start;
+	**/
 }
 
 /**
@@ -112,7 +111,7 @@ void cocktail_sort_list(listint_t **list)
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 				return;
 
-	start = *list;
+	start = NULL;
 	end = NULL;
 	current = *list;
 	next = current->next;
